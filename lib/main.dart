@@ -8,7 +8,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -23,6 +22,7 @@ class MyApp extends StatelessWidget {
         );
       },
       designSize: const Size(375, 812),
+      minTextAdapt: true,
       child: const SignUpScreen(),
     );
   }
@@ -54,11 +54,11 @@ class SignUpScreen extends StatelessWidget {
             SizedBox(
               height: 34.h,
               width: 343.w,
-              child: const Text(
+              child: Text(
                 "Meow!",
                 style: TextStyle(
-                  fontSize: 28,
-                  letterSpacing: 0.36,
+                  fontSize: 28.sp,
+                  letterSpacing: 0.36.w,
                   color: Colors.black,
                 ),
                 textAlign: TextAlign.center,
@@ -70,11 +70,11 @@ class SignUpScreen extends StatelessWidget {
             SizedBox(
               height: 42.h,
               width: 325.w,
-              child: const Text(
+              child: Text(
                 "Welcome to our adoption app! \n i hope you'll find what your are looking for!",
                 style: TextStyle(
-                  fontSize: 16,
-                  letterSpacing: -0.32,
+                  fontSize: 16.sp,
+                  letterSpacing: -0.32.w,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -86,15 +86,22 @@ class SignUpScreen extends StatelessWidget {
               height: 301.h,
               child: Form(
                 child: Column(children: [
-                  const InputField(),
+                  const InputField(
+                    hintText: "User name",
+                  ),
                   SizedBox(
                     height: 16.h,
                   ),
-                  const InputField(),
+                  const InputField(
+                    hintText: "Email",
+                  ),
                   SizedBox(
                     height: 16.h,
                   ),
-                  const InputField(),
+                  const InputField(
+                    hintText: "Password",
+                    icon: Icon(Icons.visibility),
+                  ),
                   SizedBox(
                     height: 16.h,
                   ),
@@ -107,12 +114,12 @@ class SignUpScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {},
-                    child: const Text(
+                    child: Text(
                       "Sign in",
                       style: TextStyle(
-                        fontSize: 22,
+                        fontSize: 22.sp,
                         fontWeight: FontWeight.w500,
-                        letterSpacing: 0.35,
+                        letterSpacing: 0.35.w,
                       ),
                     ),
                   ),
@@ -126,13 +133,13 @@ class SignUpScreen extends StatelessWidget {
                       SizedBox(
                         width: 16.w,
                       ),
-                      const Text(
+                      Text(
                         "Sign up with Facebook",
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w500,
-                          color: Color(0xff1c1c1e),
-                          letterSpacing: -0.32,
+                          color: const Color(0xff1c1c1e),
+                          letterSpacing: -0.32.w,
                         ),
                       )
                     ],
@@ -152,10 +159,10 @@ class SignUpScreen extends StatelessWidget {
                     Text(
                       "Have an account?",
                       style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 13.sp,
                         color: const Color(0xff3c3c43).withOpacity(0.6),
                         fontWeight: FontWeight.w600,
-                        letterSpacing: -0.08,
+                        letterSpacing: -0.08.w,
                       ),
                     ),
                     SizedBox(
@@ -181,19 +188,35 @@ class SignUpScreen extends StatelessWidget {
 }
 
 class InputField extends StatelessWidget {
-  const InputField({
-    Key? key,
-  }) : super(key: key);
+  final String hintText;
+  final Icon? icon;
+  const InputField({Key? key, required this.hintText, this.icon})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
       height: 54.h,
-      child: TextFormField(
-        decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(40.r),
+      child: Center(
+        child: TextFormField(
+          decoration: InputDecoration(
+            hintText: hintText,
+            suffixIcon: icon,
+            contentPadding: const EdgeInsets.symmetric(
+              vertical: 15,
+              horizontal: 20,
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(40.r),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(40.r),
+              borderSide: const BorderSide(
+                color: Color(0xfff86601),
+                width: 0.5,
+              ),
+            ),
           ),
         ),
       ),
